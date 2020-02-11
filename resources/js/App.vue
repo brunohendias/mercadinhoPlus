@@ -2,6 +2,7 @@
 	<div>
 		<h1>Ola filha da puta</h1>
 		{{ produtos }}
+		{{ msg }}
 	</div>
 </template>
 
@@ -10,12 +11,27 @@ export default {
 
   name: 'App',
 
-  props: ['produtos'],
+  data() {
+  	return {
+  		produtos: [],
+  		msg: ''
+  	}
+  },
 
-  data () {
-    return {
+  created() {
+  	this.buscarProdutos();
+  },
 
-    }
+  methods: {
+  	async buscarProdutos() {
+  		await axios.get('/cadastroproduto').then(response => {
+  			this.produtos = response.data
+  			this.msg = "ok"
+  		}).catch(err => {
+  			this.msg = "erro na busca"
+  		})
+  	}
   }
+
 }
 </script>

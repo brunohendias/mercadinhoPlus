@@ -24,7 +24,8 @@ class ProdutoController extends Controller
     {
         $produtos = Produto::get();
 
-        return view('cadastrar.cadastrar', ['produtos' => $produtos]);
+        return $produtos;
+        // return view('cadastrar.cadastrar', ['produtos' => $produtos]);
     }
 
     /**
