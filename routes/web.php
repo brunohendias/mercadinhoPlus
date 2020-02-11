@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('cadastroproduto')->group(function () {
+	Route::get('/', 'ProdutoController@index')->name('produto');
+});
