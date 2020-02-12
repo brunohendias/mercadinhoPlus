@@ -11,6 +11,11 @@ window.Vue = require('vue');
 import axios from 'axios';
 Vue.use(axios);
 
+import vueMask from 'di-vue-mask';
+Vue.use(vueMask);
+
+import 'sweetalert';
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -23,6 +28,7 @@ Vue.use(axios);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('App', require('./App.vue').default);
+Vue.component('gerenciarprodutos', require('./gerenciarProdutos.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

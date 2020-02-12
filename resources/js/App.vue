@@ -1,37 +1,22 @@
 <template>
 	<div>
-		<h1>Ola filha da puta</h1>
-		{{ produtos }}
-		{{ msg }}
+    <div class="container">
+      <div class="row col-lg-8 m-auto">
+        <Cadastroproduto />		
+      </div>
+    </div>
 	</div>
 </template>
 
 <script>
+import Cadastroproduto from './components/cadastro/cadastrarProduto'
+
 export default {
 
   name: 'App',
 
-  data() {
-  	return {
-  		produtos: [],
-  		msg: ''
-  	}
-  },
-
-  created() {
-  	this.buscarProdutos();
-  },
-
-  methods: {
-  	async buscarProdutos() {
-  		await axios.get('/cadastroproduto').then(response => {
-  			this.produtos = response.data
-  			this.msg = "ok"
-  		}).catch(err => {
-  			this.msg = "erro na busca"
-  		})
-  	}
+  components: {
+    Cadastroproduto
   }
-
 }
 </script>

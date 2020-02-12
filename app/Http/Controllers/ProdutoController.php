@@ -12,7 +12,7 @@ class ProdutoController extends Controller
 
     public function __construct(Request $request) 
     {
-        $this->request = $request; 
+        $this->request = $request;
     }
     
     /**
@@ -22,10 +22,19 @@ class ProdutoController extends Controller
      */
     public function index()
     {
+        return view('cadastrar.cadastrar');
+    }
+
+    public function indexprodutos()
+    {
+        return view('listar.listar');
+    }
+
+    public function listarProdutos()
+    {
         $produtos = Produto::get();
 
         return $produtos;
-        // return view('cadastrar.cadastrar', ['produtos' => $produtos]);
     }
 
     /**
@@ -46,7 +55,11 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Produto = new Produto();
+
+        $data = $this->request->all();
+
+        $insert = $Produto->create($data);
     }
 
     /**
@@ -91,6 +104,6 @@ class ProdutoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Produto::destroy($id);
     }
 }
