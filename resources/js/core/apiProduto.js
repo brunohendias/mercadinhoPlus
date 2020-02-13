@@ -7,6 +7,10 @@ export default {
 		let url = '/produtos/listar'
 		return axios.get(url)
 	},
+	editarProduto(id, body) {
+		let url = '/produtos/editar/'+id
+		return axios.put(url, body)
+	},
 	deletarProduto(id) {
 		let url = '/produtos/deletar/'+id
 		return axios.delete(url)

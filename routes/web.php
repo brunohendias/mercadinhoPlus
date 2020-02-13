@@ -15,13 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('cadastroproduto')->group(function () {
-	Route::get('/', 'ProdutoController@index')->name('produto');
-	Route::post('/store', 'ProdutoController@store')->name('cadastrarproduto');
+Route::prefix('cadastroproduto')->group(function() {
+	Route::get('/', 'CadastrarProdutoController@create')->name('produto');
+	Route::post('/store', 'CadastrarProdutoController@store')->name('cadastrarproduto');
 });
 
 Route::prefix('produtos')->group(function () {
-	Route::get('/', 'ProdutoController@indexprodutos')->name('indexprodutos');
-	Route::get('/listar', 'ProdutoController@listarProdutos')->name('listarprodutos');
-	Route::delete('/deletar/{id}', 'ProdutoController@destroy')->name('deletarproduto');
+	Route::get('/', 'ProdutosController@create')->name('produtos');
+	Route::get('/listar', 'ProdutosController@index')->name('listarprodutos');
+	Route::put('/editar/{id}', 'ProdutosController@update')->name('editarproduto');
+	Route::delete('/deletar/{id}', 'ProdutosController@destroy')->name('deletarproduto');
 });

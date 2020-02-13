@@ -94,6 +94,7 @@
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                     <a href="{{ route('produto') }}">Cadastrar produto</a>
+                    <a href="{{ route('produtos') }}">Editar produtos</a>
                 </div>
             </div>
         </div>

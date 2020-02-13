@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Produto;
+use \App\Model\Produtos;
 
-class ProdutoController extends Controller
+class ProdutosController extends Controller
 {
 
     protected $request;
+    protected $produtos;
 
-    public function __construct(Request $request) 
+    public function __construct(Request $request, Produtos $produtos)
     {
         $this->request = $request;
+        $this->produtos = $produtos;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -22,19 +24,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        return view('cadastrar.cadastrar');
-    }
-
-    public function indexprodutos()
-    {
-        return view('listar.listar');
-    }
-
-    public function listarProdutos()
-    {
-        $produtos = Produto::get();
-
-        return $produtos;
+        return $this->produtos->get();
     }
 
     /**
@@ -44,22 +34,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $Produto = new Produto();
-
-        $data = $this->request->all();
-
-        $insert = $Produto->create($data);
+        return view('listar.listarProdutos');
     }
 
     /**
@@ -70,7 +45,9 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        //
+        $produto = $this->produtos->find($id);
+
+        return $produto;
     }
 
     /**
@@ -81,7 +58,9 @@ class ProdutoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $produto = $this->produtos->find($id);
+
+        return $produto;
     }
 
     /**
@@ -91,9 +70,13 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        $data = $this->request->all();
+
+        $produto = $this->edit($id);
+
+        $update = $produto->update($data);
     }
 
     /**
@@ -104,6 +87,6 @@ class ProdutoController extends Controller
      */
     public function destroy($id)
     {
-        $delete = Produto::destroy($id);
+        $this->produtos->destroy($id);
     }
 }

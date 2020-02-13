@@ -14,6 +14,16 @@
 							<label for="quantidadeProduto"><strong>Quantidade*</strong></label>
 							<input type="text" class="form-control" name="quantidadeProduto" id="quantidadeProduto" placeholder="0" v-model="produto.quantidade" v-mask-number/>
 						</div>
+						<div class="col-lg-6">
+							<label for="categoria"><strong>Categoria*</strong></label>
+							<input type="text" class="form-control" name="categoria" id="categoria" placeholder="Categoria" v-model="produto.categoria">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="linkImage"><strong>Link da imagem*</strong></label>
+							<input type="text" class="form-control" name="linkImage" id="linkImage" placeholder="Link" v-model="produto.link_image">
+						</div>
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -38,8 +48,10 @@ export default {
 			produto: {
 				nome: '',
 				valor: null,
-				descricao: '',
-				quantidade: null
+				quantidade: null,
+				categoria: '',
+				link_image: '',
+				descricao: ''
 			}
 		}
 	},
