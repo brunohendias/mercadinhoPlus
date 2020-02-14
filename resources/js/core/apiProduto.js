@@ -7,8 +7,16 @@ export default {
 		let url = '/produtos/listar'
 		return axios.get(url)
 	},
-	editarProduto(id, body) {
+	infoProduto(id) {
+		let url = '/produtos/info/'+id
+		return axios.get(url)
+	},
+	editarProduto(id) {
 		let url = '/produtos/editar/'+id
+		return axios.get(url)
+	},
+	updateProduto(id, body) {
+		let url = '/produtos/update/'+id
 		return axios.put(url, body)
 	},
 	deletarProduto(id) {

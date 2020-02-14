@@ -1,8 +1,8 @@
 <template>
 	<div>
     <div class="container">
-      <div class="row col-lg-8 m-auto">
-        <Cadastroproduto />		
+      <div class="row">
+        <Cadastroproduto />
       </div>
     </div>
 	</div>

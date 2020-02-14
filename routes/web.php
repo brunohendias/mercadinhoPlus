@@ -23,6 +23,8 @@ Route::prefix('cadastroproduto')->group(function() {
 Route::prefix('produtos')->group(function () {
 	Route::get('/', 'ProdutosController@create')->name('produtos');
 	Route::get('/listar', 'ProdutosController@index')->name('listarprodutos');
-	Route::put('/editar/{id}', 'ProdutosController@update')->name('editarproduto');
+	Route::get('/info/{id}', 'ProdutosController@show')->name('infoproduto');
+	Route::get('/editar/{id}', 'ProdutosController@edit')->name('editarproduto');
+	Route::put('/update/{id}', 'ProdutosController@update')->name('updateproduto');
 	Route::delete('/deletar/{id}', 'ProdutosController@destroy')->name('deletarproduto');
 });

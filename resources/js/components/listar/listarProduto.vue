@@ -1,5 +1,5 @@
 <template>
-	<div class="col-lg-12">
+	<div class="mx-4">
 		<h3>Editar produtos</h3>
 		<table v-if="this.produtos.length > 0" class="table table-striped">
 			<thead class="thead-dark">
@@ -24,20 +24,22 @@
 					<th scope="col">R$ {{produto.valor}}</th>
 					<th scope="col">{{produto.quantidade}}</th>
 					<th scope="col">{{produto.categoria}}</th>
-					<th scope="col">{{produto.descricao}}</th>
 					<th scope="col">
-						<a class="btn border-primary" @click="infoProduto(produto)">
-							<img src="https://img.icons8.com/material-rounded/24/000000/information.png">
+						{{produto.descricao.substr(0, 330) + ' ...'}}
+					</th>
+					<th scope="col">
+						<a class="btn border-primary" @click="inforProduto(produto.id)">
+							<img src="https://img.icons8.com/material-rounded/20/000000/information.png">
 						</a>
 					</th>
 					<th scope="col">
-						<a class="btn border-dark" @click="recuperarProduto(produto)" data-target="#modal" data-toggle="modal">
-							<img src="https://img.icons8.com/carbon-copy/24/000000/multi-edit.png">
+						<a class="btn border-dark" @click="editarProduto(produto.id)" data-target="#modal" data-toggle="modal">
+							<img src="https://img.icons8.com/carbon-copy/20/000000/multi-edit.png">
 						</a>
 					</th>
 					<th scope="col">
 						<a class="btn border-danger" @click="deletarProduto(produto.id)">
-							<img src="https://img.icons8.com/ios-glyphs/24/000000/trash--v1.png">
+							<img src="https://img.icons8.com/ios-glyphs/20/000000/trash--v1.png">
 						</a>
 					</th>
 				</tr>
@@ -47,7 +49,7 @@
 		<div class="modal fade" id="modal">
 			<div class="modal-dialog modal-xl" role="document">
 				<div class="modal-content">
-					<div class="modal-header">
+					<div class="modal-header bg-dark text-light">
 						<h4 class="modal-title">Editar produto</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">X</span>
@@ -56,43 +58,43 @@
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-lg-4">
-								<img :src="novoProduto.link_image" class="imagemproduto" />
+								<img :src="editProduto.link_image" class="imagemproduto" />
 							</div>
 							<div class="col-lg-4">
 								<label for="nomeProduto"><strong>Nome do produto*</strong></label>
-								<input type="text" class="form-control" name="nomeProduto" placeholder="Nome do produto" v-model="novoProduto.nome" />
+								<input type="text" class="form-control" name="nomeProduto" placeholder="Nome do produto" v-model="editProduto.nome" max="50" maxlength="50" />
 								<div class="row mt-2">
 									<div class="col-lg-6 mt-2">
 										<label for="valorProduto"><strong>Valor do produto*</strong></label>
-										<input type="text" class="form-control" name="valorProduto" placeholder="00,00" v-model="novoProduto.valor"/>
+										<input type="text" class="form-control" name="valorProduto" placeholder="00,00" v-model="editProduto.valor" max="12" maxlength="12"/>
 									</div>
 									<div class="col-lg-6 mt-2">
 										<label for="quantidadeProduto"><strong>Quantidade*</strong></label>
-										<input type="text" class="form-control" name="quantidadeProduto" id="quantidadeProduto" placeholder="0" v-model="novoProduto.quantidade" v-mask-number/>
+										<input type="text" class="form-control" name="quantidadeProduto" id="quantidadeProduto" placeholder="0" v-model="editProduto.quantidade" v-mask-number max="10" maxlength="10"/>
 									</div>
 									<div class="col-lg-6 mt-2">
 										<label for="categoria"><strong>Categoria*</strong></label>
-										<input type="text" class="form-control" name="categoria" id="categoria" placeholder="Categoria" v-model="novoProduto.categoria">
+										<input type="text" class="form-control" name="categoria" id="categoria" placeholder="Categoria" v-model="editProduto.categoria" maxlength="25" max="25">
 									</div>
 								</div>
 								<div class="row mt-2">
 									<div class="col-sm-12">
 										<label for="linkImage"><strong>Link da imagem*</strong></label>
-										<input type="text" class="form-control" name="linkImage" id="linkImage" placeholder="Link" v-model="novoProduto.link_image">
+										<input type="text" class="form-control" name="linkImage" id="linkImage" placeholder="Link" v-model="editProduto.link_image" maxlength="255" max="255">
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-4 mt-2">
 								<label for="descricaoProduto"><strong>Descrição do produto*</strong></label>
-								<textarea name="descricaoProduto" class="form-control" id="descricaoProduto" cols="30" rows="10" v-model="novoProduto.descricao"></textarea>
+								<textarea name="descricaoProduto" class="form-control" id="descricaoProduto" cols="30" rows="10" v-model="editProduto.descricao"></textarea>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal" @click="editarProduto()">Save changes</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" @click="updateProduto()">Salvar alterações</button>
 					</div>
 				</div>
-			</div>
+			</div><!-- Fim modal edit -->
 		</div>
 	</div>
 </template>
@@ -105,7 +107,8 @@ export default {
 	data() {
 		return {
 			produtos: [],
-			novoProduto: {},
+			infoProduto: {},
+			editProduto: {},
 			nome: '',
 			msg: ''
 		}
@@ -124,24 +127,37 @@ export default {
 				this.msg = "Ocorreu algum erro na busca"
 			})
 		},
-		infoProduto(produto) {
-			swal({
-				title: "Em construção",
-				icon: "warning"
+		async inforProduto(id) {
+			await apiProduto.infoProduto(id).then(response => {
+				this.infoProduto = response.data
+			}).catch(error => {
+				swal({
+					title: 'Produto não encontrado',
+					icon: 'error'
+				})
 			})
 		},
-		recuperarProduto(produto) {
-			this.novoProduto.id = produto.id
-			this.novoProduto.nome = produto.nome
-			this.novoProduto.valor = produto.valor
-			this.novoProduto.quantidade = produto.quantidade
-			this.novoProduto.categoria = produto.categoria
-			this.novoProduto.link_image = produto.link_image
-			this.novoProduto.descricao = produto.descricao
-			this.nome = produto.nome
+		async editarProduto(id) {
+			await apiProduto.editarProduto(id).then(response => {
+				this.editProduto = response.data
+				this.nome = response.data.nome
+			}).catch(error => {
+				swal({
+					title: 'Produto não encontrado',
+					icon: 'error'
+				})
+			})
+			// this.novoProduto.id = produto.id
+			// this.novoProduto.nome = produto.nome
+			// this.novoProduto.valor = produto.valor
+			// this.novoProduto.quantidade = produto.quantidade
+			// this.novoProduto.categoria = produto.categoria
+			// this.novoProduto.link_image = produto.link_image
+			// this.novoProduto.descricao = produto.descricao
+			// this.nome = produto.nome
 		},
-		editarProduto() {
-			let id = this.novoProduto.id
+		updateProduto() {
+			let id = this.editProduto.id
 			let nome = this.nome
 			let msg = 'Realmente quer editar o produto: '+nome+' ?'
 			swal({
@@ -153,16 +169,9 @@ export default {
 				]
 			}).then(async willChange => {
 				if(willChange) {
-					let produto = this.novoProduto
-					let data = {
-						'nome': produto.nome,
-						'valor': produto.valor.replace(',', '.'),
-						'quantidade': produto.quantidade,
-						'categoria': produto.categoria,
-						'link_image': produto.link_image,
-						'descricao': produto.descricao
-					}
-					await apiProduto.editarProduto(id, data).then(response => {
+					this.editProduto.valor = this.editProduto.valor.toString().replace('.', '')
+					this.editProduto.valor = this.editProduto.valor.toString().replace(',', '.')
+					await apiProduto.updateProduto(id, this.editProduto).then(response => {
 						msg = nome+' alterado com suscesso!'
 						swal({
 							title: msg,
