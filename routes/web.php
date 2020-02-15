@@ -25,6 +25,7 @@ Route::prefix('produtos')->group(function () {
 	Route::get('/listar', 'ProdutosController@index')->name('listarprodutos');
 	Route::get('/info/{id}', 'ProdutosController@show')->name('infoproduto');
 	Route::get('/editar/{id}', 'ProdutosController@edit')->name('editarproduto');
+	Route::post('/fill', 'ProdutosController@buscarPorFiltro')->name('filtronome');
 	Route::put('/update/{id}', 'ProdutosController@update')->name('updateproduto');
 	Route::delete('/deletar/{id}', 'ProdutosController@destroy')->name('deletarproduto');
 });
