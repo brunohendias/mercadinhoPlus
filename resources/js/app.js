@@ -30,6 +30,11 @@ import 'sweetalert';
 Vue.component('App', require('./App.vue').default);
 Vue.component('gerenciarprodutos', require('./gerenciarProdutos.vue').default);
 
+Vue.filter('currency', function (value) {
+    let val = (value/1).toFixed(2).replace('.', ',')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+});
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
