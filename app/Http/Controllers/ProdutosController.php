@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Model\Produtos;
-use DB;
 
 class ProdutosController extends Controller
 {
@@ -53,17 +52,11 @@ class ProdutosController extends Controller
 
     public function buscarPorFiltro()
     {
-        $produtos = DB::table('produtos')
-            ->where('nome', $this->request->nome)
-            ->orwhere('categoria', $this->request->categoria)
-            ->orwhere('quantidade', $this->request->quantidade)
-            ->get();
-        
-        if(sizeof($produtos) == 0) {
-            return $this->index();
-        }
+        $produtosFiltro = $this->produtos->filtro($this->request);
 
-        return $produtos;
+        $produtosFiltro ? $data = $produtosFiltro : $data = $this->index();
+
+        return $data;
     }
 
     /**

@@ -2,10 +2,13 @@
 	<div class="container">
 
 		<buscaGeral @produtos="produtos = $event"/>
-		
-		<div class="row">
+
+		<div v-if="buscando">
+			<half-circle-spinner color="#f00" class="m-auto"/>
+		</div>
+		<div class="row" v-else>
 			<h3>Editar produtos</h3>
-			<table v-if="this.produtos.length > 0" class="table table-dark">
+			<table class="table table-dark">
 				<thead> 
 					<tr>
 						<th scope="col">Imagem</th>
@@ -19,9 +22,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="(produto, i) in produtos" :key="i">
+					<tr v-for="produto in produtos">
 						<th scope="col">
-							<img :src="produto.link_image" class="imagemicon" />
+							<img :src="produto.link_image" class="imagem-icon" />
 						</th>
 						<th scope="col">{{produto.nome}}</th>
 						<th scope="col">R$ {{produto.valor | currency}}</th>
@@ -45,9 +48,10 @@
 					</tr>
 				</tbody>
 			</table>
-			<p v-else>{{ msg }}</p>
+
 			<modalEdit :id="idEdit" @listar="buscarProdutos()" />
 			<modalInfo :id="idInfo" />
+
 		</div>
 	</div>
 </template>
@@ -57,35 +61,36 @@ import apiProduto from '../../core/apiProduto.js'
 import modalEdit from '../shared/modal/modalEdit'
 import modalInfo from '../shared/modal/modalInfo'
 import buscaGeral from '../shared/busca/buscaGeral'
+import { HalfCircleSpinner } from 'epic-spinners'
 
 export default {
 	name: 'listarProduto',
+	components: {
+		modalEdit,
+		modalInfo,
+		buscaGeral,
+		HalfCircleSpinner
+	},
 	data() {
 		return {
 			produtos: [],
 			idEdit: null,
 			idInfo: null,
 			nome: '',
-			msg: ''
+			buscando: false
 		}
-	},
-	components: {
-		modalEdit,
-		modalInfo,
-		buscaGeral
 	},
 	created() {
 		this.buscarProdutos()
 	},
 	methods: {
 		async buscarProdutos() {
+			this.buscando = true
 			await apiProduto.listarProdutos().then(response => {
+				this.buscando = false
 				this.produtos = response.data
-				if(this.produtos.length == 0) {
-					this.msg = "Nenhum Produto Encontrado"
-				}
 			}).catch(err => {
-				this.msg = "Ocorreu algum erro na busca"
+				this.buscando = false
 			})
 		},
 		deletarProduto(id) {
@@ -125,7 +130,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-	.imagemicon {
+	.imagem-icon {
 		height: 120px;
 		width: 120px;		
 	}

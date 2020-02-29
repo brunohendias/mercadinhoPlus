@@ -16,16 +16,18 @@ Route::get('/', function () {
 });
 
 Route::prefix('cadastroproduto')->group(function() {
-	Route::get('/', 'CadastrarProdutoController@create')->name('produto');
-	Route::post('/store', 'CadastrarProdutoController@store')->name('cadastrarproduto');
+	Route::get('/', 'CadastrarProdutoController@create')->name('cadastrarproduto');
+	Route::post('/store', 'CadastrarProdutoController@store')->name('dadosproduto');
 });
 
 Route::prefix('produtos')->group(function () {
-	Route::get('/', 'ProdutosController@create')->name('produtos');
-	Route::get('/listar', 'ProdutosController@index')->name('listarprodutos');
-	Route::get('/info/{id}', 'ProdutosController@show')->name('infoproduto');
-	Route::get('/editar/{id}', 'ProdutosController@edit')->name('editarproduto');
-	Route::post('/fill', 'ProdutosController@buscarPorFiltro')->name('filtronome');
-	Route::put('/update/{id}', 'ProdutosController@update')->name('updateproduto');
-	Route::delete('/deletar/{id}', 'ProdutosController@destroy')->name('deletarproduto');
+	Route::name('produto')->group(function () {
+		Route::get('/', 'ProdutosController@create');
+		Route::get('/listar', 'ProdutosController@index')->name('.listar');
+		Route::get('/info/{id}', 'ProdutosController@show')->name('.info');
+		Route::get('/editar/{id}', 'ProdutosController@edit')->name('.editar');
+		Route::post('/fill', 'ProdutosController@buscarPorFiltro')->name('.filtro');
+		Route::put('/update/{id}', 'ProdutosController@update')->name('.update');
+		Route::delete('/deletar/{id}', 'ProdutosController@destroy')->name('.deletar');
+	});
 });

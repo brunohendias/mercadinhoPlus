@@ -1,7 +1,7 @@
 <template>
-	<div class="row borderForm mb-5 py-4 bg-dark text-light">
+	<div class="row mb-5 p-4 text-light bg-dark">
 		<form class="col-lg-12" method="POST">
-			<h4><strong>Busca por filtro</strong></h4>
+			<h4><strong>Pesquise pela informação ou parte dela</strong></h4>
 			<div class="row pt-3">
 				<div class="col-sm-4">
 					<label for="nomefiltro"><strong>Nome do produto</strong></label>
@@ -16,7 +16,8 @@
 					<input class="form-control" type="text" name="quantidadefiltro" v-model="filtro.quantidade" />
 				</div>
 			</div>
-			<button class="btn btn-primary mt-3" @click.prevent="buscaFiltro(filtro)">buscar</button>
+			<button class="btn btn-primary mt-3" @click.prevent="filtroBusca(filtro)">buscar</button>
+			<div v-show="msg" class="mt-3 alert alert-danger">{{ msg }}</div>
 		</form>
 	</div>
 </template>
@@ -28,34 +29,24 @@ export default {
 	name: 'buscaGeral',
 	data() {
 		return {
-			filtro: {}
+			filtro: {},
+			msg: ''
 		}
 	},
 	methods: {
-		async buscaFiltro(filtro) {
+		async filtroBusca(filtro) {
 			await apiProduto.buscaFiltrada(filtro).then(response => {
-				if(response.data.length == 0) {
-					swal({
-						title: 'Nenhum produto encontrado',
-						icon: 'error'
-					})
-				} else if(response.data.length > 0) {
-					let produtos = response.data
-					this.$emit('produtos', produtos)
+				let produtos = response.data
+				if(produtos.length == 0) {
+					this.msg = "Nenhum produto encontrado"
+				} else if(produtos.length > 0) {
+					this.msg = ""
 				}
+				this.$emit('produtos', produtos)
 			}).catch(err => {
-				swal({
-					title: 'Ocorreu algum erro na busca',
-					icon: 'error'
-				})
+				this.msg = 'Ocorreu algum erro na busca'
 			})
 		}
 	}
 }
 </script>
-
-<style>
-	.borderForm {
-		border: 1px solid #ddd;
-	}
-</style>
