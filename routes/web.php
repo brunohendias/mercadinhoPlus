@@ -12,17 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::prefix('cadastroproduto')->group(function() {
-	Route::get('/', 'CadastrarProdutoController@create')->name('cadastrarproduto');
-	Route::post('/store', 'CadastrarProdutoController@store')->name('dadosproduto');
+    return view('layouts.app');
 });
 
 Route::prefix('produtos')->group(function () {
 	Route::name('produto')->group(function () {
-		Route::get('/', 'ProdutosController@create');
+		Route::post('/store', 'CadastrarProdutoController@store')->name('.cadastro');
 		Route::get('/listar', 'ProdutosController@index')->name('.listar');
 		Route::get('/info/{id}', 'ProdutosController@show')->name('.info');
 		Route::get('/editar/{id}', 'ProdutosController@edit')->name('.editar');

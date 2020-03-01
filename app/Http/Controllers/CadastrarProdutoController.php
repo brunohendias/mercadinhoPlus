@@ -8,16 +8,6 @@ use \App\Model\Produtos;
 class CadastrarProdutoController extends Controller
 {
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('cadastrar.cadastrarProduto');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

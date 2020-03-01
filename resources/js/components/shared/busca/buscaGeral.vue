@@ -1,5 +1,5 @@
 <template>
-	<div class="row mb-5 p-4 text-light bg-dark">
+	<div class="row mb-5 p-4 text-light bg-dark borderTop">
 		<form class="col-lg-12" method="POST">
 			<h4><strong>Pesquise pela informação ou parte dela</strong></h4>
 			<div class="row pt-3">
@@ -46,7 +46,16 @@ export default {
 			}).catch(err => {
 				this.msg = 'Ocorreu algum erro na busca'
 			})
+			this.filtro = {}
 		}
 	}
 }
 </script>
+
+<style>
+	.borderTop {
+		border-bottom: 5px solid #777;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+</style>

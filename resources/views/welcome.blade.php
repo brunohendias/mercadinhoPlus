@@ -92,8 +92,8 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
-                    <a href="{{ route('cadastrarproduto') }}">Cadastrar produto</a>
-                    <a href="{{ route('produto') }}">Editar produtos</a>
+                    {{-- <a href="/cadastroproduto">Cadastrar produto</a>
+                    <a href="/produtos">Editar produtos</a> --}}
                 </div>
             </div>
         </div>

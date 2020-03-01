@@ -8,12 +8,31 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+//Router
+import VueRouter from 'vue-router'
+import { routes } from './router/routes'
+
+Vue.use(VueRouter)
+const router = new VueRouter({
+  mode: 'history',
+  base: __dirname,
+  routes
+})
+
+//Menu lateral
+import VueSidebarMenu from 'vue-sidebar-menu'
+import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
+Vue.use(VueSidebarMenu)
+
+//Axios
 import axios from 'axios';
 Vue.use(axios);
 
+//Mask
 import vueMask from 'di-vue-mask';
 Vue.use(vueMask);
 
+//Modal alert
 import 'sweetalert';
 
 /**
@@ -24,11 +43,7 @@ import 'sweetalert';
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 Vue.component('App', require('./App.vue').default);
-Vue.component('gerenciarprodutos', require('./gerenciarProdutos.vue').default);
 
 Vue.filter('currency', function (value) {
     let val = (value/1).toFixed(2).replace('.', ',')
@@ -43,4 +58,5 @@ Vue.filter('currency', function (value) {
 
 const app = new Vue({
     el: '#app',
+    router
 });
