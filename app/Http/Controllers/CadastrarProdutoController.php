@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Model\Produtos;
+use \App\Model\Produto;
 
 class CadastrarProdutoController extends Controller
 {
@@ -13,7 +13,7 @@ class CadastrarProdutoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Produtos $produtos)
+    public function store(Request $request, Produto $produtos)
     {
         $data = $request->all();
 

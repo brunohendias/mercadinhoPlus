@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Model\Produtos;
+use \App\Model\Produto;
 
 class ProdutosController extends Controller
 {
-
-    protected $request;
     protected $produtos;
 
-    public function __construct(Request $request, Produtos $produtos)
+    /**
+     * Instancia do objeto no construct
+     */
+    public function __construct(Produto $produtos)
     {
-        $this->request = $request;
         $this->produtos = $produtos;
     }
 
@@ -40,13 +40,31 @@ class ProdutosController extends Controller
         return $produto;
     }
 
-    public function buscarPorFiltro()
+    /**
+     *  Buscar os produtos especificos
+     */
+    public function buscarPorFiltro(Request $request)
     {
-        $produtosFiltro = $this->produtos->filtro($this->request);
+        $nome = $request->nome;
+        $categoria = $request->categoria;
+        $quantidade = $request->quantidade;
 
-        $produtosFiltro ? $data = $produtosFiltro : $data = $this->index();
+        $produtosFiltro = $this->produtos
+            ->when($nome, function($query) use ($nome) {
+                return $query->where('nome', 'like', '%'.$nome.'%');
+            })
+            ->when($categoria, function($query) use ($categoria) {
+                return $query->where('categoria', 'like', '%'.$categoria.'%');
+            })
+            ->when($quantidade, function($query) use ($quantidade) {
+                return $query->where('quantidade', $quantidade);
+            })->get();
 
-        return $data;
+        if(is_null($produtosFiltro)){
+            return array('msg' => "Nenhum registro encontrado");
+        }
+
+        return $produtosFiltro;
     }
 
     /**
@@ -69,13 +87,33 @@ class ProdutosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        $data = $this->request->all();
-
         $produto = $this->edit($id);
 
-        $update = $produto->update($data);
+        if(is_null($produto)) {
+            return array('msg' => "Registro não encontrado");
+        }
+
+        if($request->has('nome') && $request->has('categoria') && 
+            $request->has('valor') && $request->has('link_image') && 
+            $request->has('quantidade') && $request->has('descricao')) 
+        {
+            $produto->descricao = $request->descricao;
+            $produto->quantidade = $request->quantidade;
+            $produto->link_image = $request->link_image;
+            $produto->valor = $request->valor;
+            $produto->categoria = $request->categoria;
+            $produto->nome = $request->nome;
+        }
+
+        $update = $produto->save();
+
+        if(is_null($update)) {
+            return array('msg' => "Erro ao alterar o registro");
+        }
+
+        return array('msg' => "Registro alterado com sucesso");
     }
 
     /**
@@ -86,6 +124,12 @@ class ProdutosController extends Controller
      */
     public function destroy($id)
     {
-        $this->produtos->destroy($id);
+        $delete = $this->produtos->destroy($id);
+
+        if(is_null($delete)) {
+            return array('msg' => "Erro ao deletar");
+        }
+            
+        return array('msg' => "Deletado com sucesso");
     }
 }
