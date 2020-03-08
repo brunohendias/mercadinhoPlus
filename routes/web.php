@@ -15,8 +15,15 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
+Route::get('/cadastroproduto', function () {
+    return view('layouts.app');
+});
+
 Route::prefix('produtos')->group(function () {
 	Route::name('produto')->group(function () {
+		Route::get('/', function () { 
+			return view('layouts.app'); 
+		});
 		Route::post('/store', 'CadastrarProdutoController@store')->name('.cadastro');
 		Route::get('/listar', 'ProdutosController@index')->name('.listar');
 		Route::get('/info/{id}', 'ProdutosController@show')->name('.info');

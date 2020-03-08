@@ -2,10 +2,10 @@
 	<div class="modal fade" id="modal-edit">
 		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
-				<div class="modal-header bg-dark text-light">
-					<h4 class="modal-title">Editar produto</h4>
+				<div class="modal-header bg-warning">
+					<h4 class="modal-title">Editar o produto: {{ produto.nome }}</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<font color="#fff" aria-hidden="true">X</font>
+						<font aria-hidden="true">X</font>
 					</button>
 				</div>
 				<div class="modal-body">

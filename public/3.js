@@ -58,8 +58,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'cadastrarProduto',
@@ -183,293 +181,290 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-lg-12 row" }, [
-    _c("form", [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-4" }, [
-          _vm.produto.link_image
-            ? _c("img", {
-                staticClass: "imagemproduto borderImage",
-                attrs: { src: _vm.produto.link_image }
-              })
-            : _c("p", { staticClass: "text-center" }, [
-                _c("strong", [_vm._v("Digite o link no campo Link da imagem")])
-              ])
+  return _c("form", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-4" }, [
+        _vm.produto.link_image
+          ? _c("img", {
+              staticClass: "imagemproduto borderImage",
+              attrs: { src: _vm.produto.link_image }
+            })
+          : _c("p", { staticClass: "text-center" }, [
+              _c("strong", [_vm._v("Digite o link no campo Link da imagem")])
+            ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-4" }, [
+        _c("label", { attrs: { for: "nomeProduto" } }, [
+          _c(
+            "strong",
+            [
+              _vm._v("Nome do produto"),
+              _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
+            ],
+            1
+          )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-4" }, [
-          _c("label", { attrs: { for: "nomeProduto" } }, [
-            _c(
-              "strong",
-              [
-                _vm._v("Nome do produto"),
-                _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.produto.nome,
-                expression: "produto.nome"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "nomeProduto",
-              placeholder: "Nome do produto",
-              max: "50",
-              maxlength: "50"
-            },
-            domProps: { value: _vm.produto.nome },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.produto, "nome", $event.target.value)
-              }
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.produto.nome,
+              expression: "produto.nome"
             }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-6" }, [
-              _c("label", { attrs: { for: "valorProduto" } }, [
-                _c(
-                  "strong",
-                  [
-                    _vm._v("Valor do produto"),
-                    _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.produto.valor,
-                    expression: "produto.valor"
-                  },
-                  {
-                    name: "mask-decimal",
-                    rawName: "v-mask-decimal.br",
-                    value: 2,
-                    expression: "2",
-                    modifiers: { br: true }
-                  }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            name: "nomeProduto",
+            placeholder: "Nome do produto",
+            max: "50",
+            maxlength: "50"
+          },
+          domProps: { value: _vm.produto.nome },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.produto, "nome", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c("label", { attrs: { for: "valorProduto" } }, [
+              _c(
+                "strong",
+                [
+                  _vm._v("Valor do produto"),
+                  _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
                 ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "valorProduto",
-                  placeholder: "00,00",
-                  max: "12",
-                  maxlength: "12"
-                },
-                domProps: { value: _vm.produto.valor },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.produto, "valor", $event.target.value)
-                  }
-                }
-              })
+                1
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-lg-6" }, [
-              _c("label", { attrs: { for: "quantidadeProduto" } }, [
-                _c(
-                  "strong",
-                  [
-                    _vm._v("Quantidade"),
-                    _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.produto.quantidade,
-                    expression: "produto.quantidade"
-                  },
-                  { name: "mask-number", rawName: "v-mask-number" }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "quantidadeProduto",
-                  id: "quantidadeProduto",
-                  placeholder: "0",
-                  max: "10",
-                  maxlength: "10",
-                  onkeypress:
-                    "return event.keyCode >= 48 && event.keyCode <= 57 "
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.produto.valor,
+                  expression: "produto.valor"
                 },
-                domProps: { value: _vm.produto.quantidade },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.produto, "quantidade", $event.target.value)
-                  }
+                {
+                  name: "mask-decimal",
+                  rawName: "v-mask-decimal.br",
+                  value: 2,
+                  expression: "2",
+                  modifiers: { br: true }
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-6" }, [
-              _c("label", { attrs: { for: "categoria" } }, [
-                _c(
-                  "strong",
-                  [
-                    _vm._v("Categoria"),
-                    _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.produto.categoria,
-                    expression: "produto.categoria"
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "valorProduto",
+                placeholder: "00,00",
+                max: "12",
+                maxlength: "12"
+              },
+              domProps: { value: _vm.produto.valor },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "categoria",
-                  id: "categoria",
-                  placeholder: "Categoria",
-                  maxlength: "25",
-                  max: "25"
-                },
-                domProps: { value: _vm.produto.categoria },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.produto, "categoria", $event.target.value)
-                  }
+                  _vm.$set(_vm.produto, "valor", $event.target.value)
                 }
-              })
-            ])
+              }
+            })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-sm-12" }, [
-              _c("label", { attrs: { for: "linkImage" } }, [
-                _c(
-                  "strong",
-                  [
-                    _vm._v("Link da imagem"),
-                    _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.produto.link_image,
-                    expression: "produto.link_image"
-                  }
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c("label", { attrs: { for: "quantidadeProduto" } }, [
+              _c(
+                "strong",
+                [
+                  _vm._v("Quantidade"),
+                  _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
                 ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "linkImage",
-                  id: "linkImage",
-                  placeholder: "Link",
-                  maxlength: "255",
-                  max: "255"
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.produto.quantidade,
+                  expression: "produto.quantidade"
                 },
-                domProps: { value: _vm.produto.link_image },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.produto, "link_image", $event.target.value)
+                { name: "mask-number", rawName: "v-mask-number" }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "quantidadeProduto",
+                id: "quantidadeProduto",
+                placeholder: "0",
+                max: "10",
+                maxlength: "10",
+                onkeypress: "return event.keyCode >= 48 && event.keyCode <= 57 "
+              },
+              domProps: { value: _vm.produto.quantidade },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
+                  _vm.$set(_vm.produto, "quantidade", $event.target.value)
                 }
-              })
-            ])
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c("label", { attrs: { for: "categoria" } }, [
+              _c(
+                "strong",
+                [
+                  _vm._v("Categoria"),
+                  _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.produto.categoria,
+                  expression: "produto.categoria"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "categoria",
+                id: "categoria",
+                placeholder: "Categoria",
+                maxlength: "25",
+                max: "25"
+              },
+              domProps: { value: _vm.produto.categoria },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.produto, "categoria", $event.target.value)
+                }
+              }
+            })
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-4" }, [
-          _c("label", { attrs: { for: "descricaoProduto" } }, [
-            _c(
-              "strong",
-              [
-                _vm._v("Descrição do produto"),
-                _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.produto.descricao,
-                expression: "produto.descricao"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              name: "descricaoProduto",
-              id: "descricaoProduto",
-              cols: "30",
-              rows: "10"
-            },
-            domProps: { value: _vm.produto.descricao },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-12" }, [
+            _c("label", { attrs: { for: "linkImage" } }, [
+              _c(
+                "strong",
+                [
+                  _vm._v("Link da imagem"),
+                  _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.produto.link_image,
+                  expression: "produto.link_image"
                 }
-                _vm.$set(_vm.produto, "descricao", $event.target.value)
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "linkImage",
+                id: "linkImage",
+                placeholder: "Link",
+                maxlength: "255",
+                max: "255"
+              },
+              domProps: { value: _vm.produto.link_image },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.produto, "link_image", $event.target.value)
+                }
               }
-            }
-          })
+            })
+          ])
         ])
       ]),
       _vm._v(" "),
-      _c("input", {
-        staticClass: "btn btn-primary float-right mt-3",
-        attrs: { type: "button", value: "Cadastrar" },
-        on: {
-          click: function($event) {
-            return _vm.cadastrarProduto()
+      _c("div", { staticClass: "col-lg-4" }, [
+        _c("label", { attrs: { for: "descricaoProduto" } }, [
+          _c(
+            "strong",
+            [
+              _vm._v("Descrição do produto"),
+              _c("font", { attrs: { color: "#f00" } }, [_vm._v("*")])
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.produto.descricao,
+              expression: "produto.descricao"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            name: "descricaoProduto",
+            id: "descricaoProduto",
+            cols: "30",
+            rows: "10"
+          },
+          domProps: { value: _vm.produto.descricao },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.produto, "descricao", $event.target.value)
+            }
           }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("input", {
+      staticClass: "btn btn-primary float-right mt-3",
+      attrs: { type: "button", value: "Cadastrar" },
+      on: {
+        click: function($event) {
+          return _vm.cadastrarProduto()
         }
-      })
-    ])
+      }
+    })
   ])
 }
 var staticRenderFns = []

@@ -7,7 +7,7 @@
 			<half-circle-spinner color="#f00" class="m-auto"/>
 		</div>
 		<div class="row" v-else>
-			<h3>Editar produtos</h3>
+			<h3 class="title">Editar produtos</h3>
 			<table class="table table-dark">
 				<thead> 
 					<tr>
@@ -133,5 +133,13 @@ export default {
 	.imagem-icon {
 		height: 120px;
 		width: 120px;		
+	}
+	.title {
+		background-color: #343a40;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		width: 100%;
+		color: white;
+		padding: 10px 0px 10px 25px;
 	}
 </style>

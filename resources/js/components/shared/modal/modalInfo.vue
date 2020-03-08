@@ -3,7 +3,7 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header bg-primary text-light">
-					<h4 class="modal-title">Informações do produto</h4>
+					<h4 class="modal-title">Informações do produto: {{ produto.nome }}</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<a data-dismiss="modal" class="text-light">X</a>
 					</button>

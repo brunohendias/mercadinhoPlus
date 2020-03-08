@@ -584,7 +584,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.imagem-icon[data-v-fa761496] {\n\theight: 120px;\n\twidth: 120px;\n}\n", ""]);
+exports.push([module.i, "\n.imagem-icon[data-v-fa761496] {\n\theight: 120px;\n\twidth: 120px;\n}\n.title[data-v-fa761496] {\n\tbackground-color: #343a40;\n\tborder-top-left-radius: 5px;\n\tborder-top-right-radius: 5px;\n\twidth: 100%;\n\tcolor: white;\n\tpadding: 10px 0px 10px 25px;\n}\n", ""]);
 
 // exports
 
@@ -810,7 +810,7 @@ var render = function() {
             "div",
             { staticClass: "row" },
             [
-              _c("h3", [_vm._v("Editar produtos")]),
+              _c("h3", { staticClass: "title" }, [_vm._v("Editar produtos")]),
               _vm._v(" "),
               _c("table", { staticClass: "table table-dark" }, [
                 _vm._m(0),
@@ -1168,9 +1168,9 @@ var render = function() {
       { staticClass: "modal-dialog modal-xl", attrs: { role: "document" } },
       [
         _c("div", { staticClass: "modal-content" }, [
-          _c("div", { staticClass: "modal-header bg-dark text-light" }, [
+          _c("div", { staticClass: "modal-header bg-warning" }, [
             _c("h4", { staticClass: "modal-title" }, [
-              _vm._v("Editar produto")
+              _vm._v("Editar o produto: " + _vm._s(_vm.produto.nome))
             ]),
             _vm._v(" "),
             _c(
@@ -1183,13 +1183,7 @@ var render = function() {
                   "aria-label": "Close"
                 }
               },
-              [
-                _c(
-                  "font",
-                  { attrs: { color: "#fff", "aria-hidden": "true" } },
-                  [_vm._v("X")]
-                )
-              ],
+              [_c("font", { attrs: { "aria-hidden": "true" } }, [_vm._v("X")])],
               1
             )
           ]),
@@ -1561,7 +1555,13 @@ var render = function() {
       { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
       [
         _c("div", { staticClass: "modal-content" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "modal-header bg-primary text-light" }, [
+            _c("h4", { staticClass: "modal-title" }, [
+              _vm._v("Informações do produto: " + _vm._s(_vm.produto.nome))
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "modal-body" }, [
             _c("div", { staticClass: "row" }, [
@@ -1592,30 +1592,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header bg-primary text-light" }, [
-      _c("h4", { staticClass: "modal-title" }, [
-        _vm._v("Informações do produto")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [
-          _c(
-            "a",
-            { staticClass: "text-light", attrs: { "data-dismiss": "modal" } },
-            [_vm._v("X")]
-          )
-        ]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [
+        _c(
+          "a",
+          { staticClass: "text-light", attrs: { "data-dismiss": "modal" } },
+          [_vm._v("X")]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this

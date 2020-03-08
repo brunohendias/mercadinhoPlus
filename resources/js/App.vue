@@ -1,6 +1,6 @@
 <template>
   <div class="mt-3">
-    <sidebar-menu :menu="menu" width="250px" :collapsed="true"></sidebar-menu>
+    <sidebar-menu :menu="menu" width="250px" class="sidebar" :collapsed="true"></sidebar-menu>
     <router-view></router-view>
   </div>
 </template>
@@ -29,14 +29,12 @@ export default {
         }
       ]
     }
-  },
-  methods: {
-    trocaRota(rota) {
-      this.$router.push({
-        name: rota,
-        path: rota
-      })
-    }
   }
 }
 </script>
+
+<style>
+  .sidebar {
+    background-color: #1e1e21;
+  }
+</style>
