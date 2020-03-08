@@ -7,6 +7,10 @@ export default {
 		let url = '/produtos/listar'
 		return axios.get(url)
 	},
+	buscarCategorias() {
+		let url = '/produtos/categorias';
+		return axios.get(url)
+	},
 	buscaFiltrada(filtro) {
 		let url = '/produtos/fill/'
 		return axios.post(url, filtro)

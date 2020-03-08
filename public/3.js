@@ -579,6 +579,10 @@ __webpack_require__.r(__webpack_exports__);
     var url = '/produtos/listar';
     return axios.get(url);
   },
+  buscarCategorias: function buscarCategorias() {
+    var url = '/produtos/categorias';
+    return axios.get(url);
+  },
   buscaFiltrada: function buscaFiltrada(filtro) {
     var url = '/produtos/fill/';
     return axios.post(url, filtro);

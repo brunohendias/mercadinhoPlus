@@ -207,6 +207,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _core_apiProduto_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../core/apiProduto.js */ "./resources/js/core/apiProduto.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -238,16 +240,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'buscaGeral',
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
+  },
   data: function data() {
     return {
       filtro: {},
+      categorias: [],
       msg: ''
     };
   },
+  created: function created() {
+    this.buscaCategorias();
+  },
   methods: {
-    filtroBusca: function filtroBusca(filtro) {
+    buscaCategorias: function buscaCategorias() {
       var _this = this;
 
       return _asyncToGenerator(
@@ -258,29 +268,54 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _core_apiProduto_js__WEBPACK_IMPORTED_MODULE_1__["default"].buscaFiltrada(filtro).then(function (response) {
-                  var produtos = response.data;
-
-                  if (produtos.length == 0) {
-                    _this.msg = "Nenhum produto encontrado";
-                  } else if (produtos.length > 0) {
-                    _this.msg = "";
-                  }
-
-                  _this.$emit('produtos', produtos);
-                })["catch"](function (err) {
-                  _this.msg = 'Ocorreu algum erro na busca';
+                return _core_apiProduto_js__WEBPACK_IMPORTED_MODULE_1__["default"].buscarCategorias().then(function (response) {
+                  response.data.map(function (categoria) {
+                    _this.categorias.push(categoria.categoria);
+                  });
                 });
 
               case 2:
-                _this.filtro = {};
-
-              case 3:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
+      }))();
+    },
+    filtroBusca: function filtroBusca(filtro) {
+      var _this2 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _core_apiProduto_js__WEBPACK_IMPORTED_MODULE_1__["default"].buscaFiltrada(filtro).then(function (response) {
+                  var produtos = response.data;
+
+                  if (produtos.length == 0) {
+                    _this2.msg = "Nenhum produto encontrado";
+                  } else if (produtos.length > 0) {
+                    _this2.msg = "";
+                  }
+
+                  _this2.$emit('produtos', produtos);
+                })["catch"](function (err) {
+                  _this2.msg = 'Ocorreu algum erro na busca';
+                });
+
+              case 2:
+                _this2.filtro = {};
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     }
   }
@@ -603,7 +638,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.borderTop {\n\tborder-bottom: 5px solid #777;\n\tborder-top-left-radius: 5px;\n\tborder-top-right-radius: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.borderTop {\n\tborder-bottom: 5px solid #777;\n\tborder-top-left-radius: 5px;\n\tborder-top-right-radius: 5px;\n}\n.form-control {\n\theight: 44px;\n}\n", ""]);
 
 // exports
 
@@ -1008,7 +1043,11 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", name: "nomefiltro" },
+              attrs: {
+                type: "text",
+                placeholder: "Ex: Cadeira",
+                name: "nomefiltro"
+              },
               domProps: { value: _vm.filtro.nome },
               on: {
                 input: function($event) {
@@ -1021,31 +1060,29 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4" }, [
-            _vm._m(2),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
+          _c(
+            "div",
+            { staticClass: "col-sm-4" },
+            [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("Multiselect", {
+                attrs: {
+                  placeholder: "Ex: casa",
+                  name: "categoriafiltro",
+                  options: _vm.categorias
+                },
+                model: {
                   value: _vm.filtro.categoria,
+                  callback: function($$v) {
+                    _vm.$set(_vm.filtro, "categoria", $$v)
+                  },
                   expression: "filtro.categoria"
                 }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", name: "categoriafiltro" },
-              domProps: { value: _vm.filtro.categoria },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.filtro, "categoria", $event.target.value)
-                }
-              }
-            })
-          ]),
+              })
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-4" }, [
             _vm._m(3),
@@ -1060,7 +1097,11 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", name: "quantidadefiltro" },
+              attrs: {
+                type: "text",
+                placeholder: "Ex: 500",
+                name: "quantidadefiltro"
+              },
               domProps: { value: _vm.filtro.quantidade },
               on: {
                 input: function($event) {
@@ -1723,7 +1764,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _buscaGeral_vue_vue_type_template_id_fa04c7fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./buscaGeral.vue?vue&type=template&id=fa04c7fe& */ "./resources/js/components/shared/busca/buscaGeral.vue?vue&type=template&id=fa04c7fe&");
 /* harmony import */ var _buscaGeral_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./buscaGeral.vue?vue&type=script&lang=js& */ "./resources/js/components/shared/busca/buscaGeral.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _buscaGeral_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buscaGeral.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/shared/busca/buscaGeral.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var vue_multiselect_dist_vue_multiselect_min_css_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-multiselect/dist/vue-multiselect.min.css?vue&type=style&index=1&lang=css& */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.css?vue&type=style&index=1&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -1732,7 +1775,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _buscaGeral_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _buscaGeral_vue_vue_type_template_id_fa04c7fe___WEBPACK_IMPORTED_MODULE_0__["render"],
   _buscaGeral_vue_vue_type_template_id_fa04c7fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -1988,6 +2031,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   listarProdutos: function listarProdutos() {
     var url = '/produtos/listar';
+    return axios.get(url);
+  },
+  buscarCategorias: function buscarCategorias() {
+    var url = '/produtos/categorias';
     return axios.get(url);
   },
   buscaFiltrada: function buscaFiltrada(filtro) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Model\Produto;
+use \App\Model\Categoria;
 
 class ProdutosController extends Controller
 {
@@ -65,6 +66,16 @@ class ProdutosController extends Controller
         }
 
         return $produtosFiltro;
+    }
+
+    /*
+     * Busca as categorias cadastradas
+     */
+    public function buscarCategorias(Categoria $categoria) 
+    {
+        $categorias = $categoria->get();
+
+        return $categorias;
     }
 
     /**

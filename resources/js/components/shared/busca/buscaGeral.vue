@@ -5,15 +5,15 @@
 			<div class="row pt-3">
 				<div class="col-sm-4">
 					<label for="nomefiltro"><strong>Nome do produto</strong></label>
-					<input class="form-control" type="text" name="nomefiltro" v-model="filtro.nome" />
+					<input class="form-control" type="text" placeholder="Ex: Cadeira" name="nomefiltro" v-model="filtro.nome" />
 				</div>
 				<div class="col-sm-4">
 					<label for="categoriafiltro"><strong>Categoria</strong></label>
-					<input class="form-control" type="text" name="categoriafiltro" v-model="filtro.categoria" />
+					<Multiselect v-model="filtro.categoria" placeholder="Ex: casa" name="categoriafiltro" :options="categorias"></Multiselect>
 				</div>
 				<div class="col-sm-4">
 					<label for="quantidadefiltro"><strong>Quantidade</strong></label>
-					<input class="form-control" type="text" name="quantidadefiltro" v-model="filtro.quantidade" />
+					<input class="form-control" type="text" placeholder="Ex: 500" name="quantidadefiltro" v-model="filtro.quantidade" />
 				</div>
 			</div>
 			<button class="btn btn-primary mt-3" @click.prevent="filtroBusca(filtro)">buscar</button>
@@ -24,16 +24,31 @@
 
 <script>
 import apiProduto from '../../../core/apiProduto.js'
+import Multiselect from 'vue-multiselect'
 
 export default {
 	name: 'buscaGeral',
+	components: {
+		Multiselect
+	},
 	data() {
 		return {
 			filtro: {},
+			categorias: [],
 			msg: ''
 		}
 	},
+	created() {
+		this.buscaCategorias()
+	},
 	methods: {
+		async buscaCategorias () {
+			await apiProduto.buscarCategorias().then(response => {
+				response.data.map(categoria => {
+					this.categorias.push(categoria.categoria)
+				})
+			})
+		},
 		async filtroBusca(filtro) {
 			await apiProduto.buscaFiltrada(filtro).then(response => {
 				let produtos = response.data
@@ -58,4 +73,9 @@ export default {
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
 	}
+	.form-control {
+		height: 44px;
+	}
 </style>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
