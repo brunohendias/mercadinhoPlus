@@ -61,10 +61,17 @@ export default {
 		async cadastrarProduto() {
 			this.produto.valor = this.produto.valor.replace(/\./g, '').replace(',', '.')
 			await apiProduto.cadastrarProduto(this.produto).then(response => {
-				swal({
-					title: 'Produto cadastrado com suscesso!',
-					icon: 'success'
-				})
+				if(response.data.msg) {
+					swal({
+						title: response.data.msg,
+						icon: 'error'
+					})
+				} else {
+					swal({
+						title: 'Produto cadastrado com suscesso!',
+						icon: 'success'
+					})
+				}
 			}).catch(err => {
 				let msg = 'Erro ao cadastrar o produto'
 				if(!this.produto.nome || !this.produto.valor || !this.produto.descricao || !this.produto.quantidade) {

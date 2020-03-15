@@ -53935,17 +53935,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(__dirname) {/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _router_routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router/routes */ "./resources/js/router/routes.js");
-/* harmony import */ var vue_sidebar_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-sidebar-menu */ "./node_modules/vue-sidebar-menu/dist/vue-sidebar-menu.js");
-/* harmony import */ var vue_sidebar_menu__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_sidebar_menu__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue_sidebar_menu_dist_vue_sidebar_menu_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-sidebar-menu/dist/vue-sidebar-menu.css */ "./node_modules/vue-sidebar-menu/dist/vue-sidebar-menu.css");
-/* harmony import */ var vue_sidebar_menu_dist_vue_sidebar_menu_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_sidebar_menu_dist_vue_sidebar_menu_css__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var di_vue_mask__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! di-vue-mask */ "./node_modules/di-vue-mask/dist/vue-mask.esm.js");
-/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
-/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_6__);
+/* WEBPACK VAR INJECTION */(function(__dirname) {/* harmony import */ var vue_sidebar_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-sidebar-menu */ "./node_modules/vue-sidebar-menu/dist/vue-sidebar-menu.js");
+/* harmony import */ var vue_sidebar_menu__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_sidebar_menu__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_sidebar_menu_dist_vue_sidebar_menu_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-sidebar-menu/dist/vue-sidebar-menu.css */ "./node_modules/vue-sidebar-menu/dist/vue-sidebar-menu.css");
+/* harmony import */ var vue_sidebar_menu_dist_vue_sidebar_menu_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_sidebar_menu_dist_vue_sidebar_menu_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var di_vue_mask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! di-vue-mask */ "./node_modules/di-vue-mask/dist/vue-mask.esm.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _router_routes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./router/routes */ "./resources/js/router/routes.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -53953,28 +53953,28 @@ __webpack_require__.r(__webpack_exports__);
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); //Router
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); //Menu lateral
 
 
 
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
+Vue.use(vue_sidebar_menu__WEBPACK_IMPORTED_MODULE_0___default.a); //Axios
+
+
+Vue.use(axios__WEBPACK_IMPORTED_MODULE_2___default.a); //Mask
+
+
+Vue.use(di_vue_mask__WEBPACK_IMPORTED_MODULE_3__["default"]); //Modal alert
+
+ //Router
+
+
+
+Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
   mode: 'history',
   base: __dirname,
-  routes: _router_routes__WEBPACK_IMPORTED_MODULE_1__["routes"]
-}); //Menu lateral
-
-
-
-Vue.use(vue_sidebar_menu__WEBPACK_IMPORTED_MODULE_2___default.a); //Axios
-
-
-Vue.use(axios__WEBPACK_IMPORTED_MODULE_4___default.a); //Mask
-
-
-Vue.use(di_vue_mask__WEBPACK_IMPORTED_MODULE_5__["default"]); //Modal alert
-
-
+  routes: _router_routes__WEBPACK_IMPORTED_MODULE_6__["routes"]
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

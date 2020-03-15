@@ -110,15 +110,11 @@ class ProdutosController extends Controller
             $request->has('valor') && $request->has('link_image') && 
             $request->has('quantidade') && $request->has('descricao')) 
         {
-            $produto->descricao = $request->descricao;
-            $produto->quantidade = $request->quantidade;
-            $produto->link_image = $request->link_image;
-            $produto->valor = $request->valor;
-            $produto->categoria = $request->categoria;
-            $produto->nome = $request->nome;
+            $update = $produto->update($request->all());
+        } 
+        else {
+            return array('msg' => 'Todos os campos são requeridos');
         }
-
-        $update = $produto->save();
 
         if(is_null($update)) {
             return array('msg' => "Erro ao alterar o registro");

@@ -8,17 +8,6 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-//Router
-import VueRouter from 'vue-router'
-import { routes } from './router/routes'
-
-Vue.use(VueRouter)
-const router = new VueRouter({
-  mode: 'history',
-  base: __dirname,
-  routes
-})
-
 //Menu lateral
 import VueSidebarMenu from 'vue-sidebar-menu'
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
@@ -34,6 +23,17 @@ Vue.use(vueMask);
 
 //Modal alert
 import 'sweetalert';
+
+//Router
+import VueRouter from 'vue-router'
+import { routes } from './router/routes'
+
+Vue.use(VueRouter)
+const router = new VueRouter({
+  mode: 'history',
+  base: __dirname,
+  routes
+})
 
 /**
  * The following block of code may be used to automatically register your

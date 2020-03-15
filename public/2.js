@@ -467,13 +467,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               switch (_context2.prev = _context2.next) {
                 case 0:
                   if (!willChange) {
-                    _context2.next = 5;
+                    _context2.next = 4;
                     break;
                   }
 
-                  _this2.produto.valor = _this2.produto.valor.replace(/\./g, '').replace(',', '.');
-                  console.log(_this2.produto.valor);
-                  _context2.next = 5;
+                  _this2.produto.valor = _this2.produto.valor.toString().replace(/\./g, '').replace(',', '.');
+                  _context2.next = 4;
                   return _core_apiProduto__WEBPACK_IMPORTED_MODULE_1__["default"].updateProduto(id, _this2.produto).then(function (response) {
                     msg = nome + ' alterado com suscesso!';
                     swal({
@@ -490,7 +489,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     });
                   });
 
-                case 5:
+                case 4:
                 case "end":
                   return _context2.stop();
               }
@@ -2026,7 +2025,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   cadastrarProduto: function cadastrarProduto(body) {
-    var url = '/cadastroproduto/store';
+    var url = '/produtos/store';
     return axios.post(url, body);
   },
   listarProdutos: function listarProdutos() {

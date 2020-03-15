@@ -17,6 +17,18 @@ class CadastrarProdutoController extends Controller
     {
         $data = $request->all();
 
-        $insert = $produtos->create($data);
+        $existe = $produtos->where('nome', $request->nome)->count();
+
+        if($existe == 0) {
+            $insert = $produtos->create($data);
+
+            if($insert) {
+                return array('msg' => 'Produto cadastrado com suscesso');
+            } else {
+                return array('msg' => 'Erro ao cadastrar o produto');
+            } 
+        } else if($existe >= 1) {
+            return array('msg' => 'Produto ja cadastrado');
+        }
     }
 }

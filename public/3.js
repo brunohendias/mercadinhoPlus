@@ -87,10 +87,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.produto.valor = _this.produto.valor.replace(/\./g, '').replace(',', '.');
                 _context.next = 3;
                 return _core_apiProduto__WEBPACK_IMPORTED_MODULE_1__["default"].cadastrarProduto(_this.produto).then(function (response) {
-                  swal({
-                    title: 'Produto cadastrado com suscesso!',
-                    icon: 'success'
-                  });
+                  if (response.data.msg) {
+                    swal({
+                      title: response.data.msg,
+                      icon: 'error'
+                    });
+                  } else {
+                    swal({
+                      title: 'Produto cadastrado com suscesso!',
+                      icon: 'success'
+                    });
+                  }
                 })["catch"](function (err) {
                   var msg = 'Erro ao cadastrar o produto';
 
@@ -572,7 +579,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   cadastrarProduto: function cadastrarProduto(body) {
-    var url = '/cadastroproduto/store';
+    var url = '/produtos/store';
     return axios.post(url, body);
   },
   listarProdutos: function listarProdutos() {

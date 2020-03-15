@@ -100,8 +100,7 @@ export default {
 				]
 			}).then(async willChange => {
 				if(willChange) {
-					this.produto.valor = this.produto.valor.replace(/\./g, '').replace(',', '.')
-					console.log(this.produto.valor)
+					this.produto.valor = this.produto.valor.toString().replace(/\./g, '').replace(',', '.')
 					await apiProduto.updateProduto(id, this.produto).then(response => {
 						msg = nome+' alterado com suscesso!'
 						swal({

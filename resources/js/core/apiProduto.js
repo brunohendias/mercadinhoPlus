@@ -1,6 +1,6 @@
 export default {
 	cadastrarProduto(body) {
-		let url = '/cadastroproduto/store'
+		let url = '/produtos/store'
 		return axios.post(url, body)
 	},
 	listarProdutos() {
