@@ -59,6 +59,13 @@ export default {
 	},
 	methods: {
 		async cadastrarProduto() {
+			if(!this.produto.nome || !this.produto.valor || !this.produto.descricao || !this.produto.quantidade) {
+				msg = "Todos os campos são obrigatorio"
+			}
+			swal({
+				title: msg,
+				icon: 'error'
+			})
 			this.produto.valor = this.produto.valor.replace(/\./g, '').replace(',', '.')
 			await apiProduto.cadastrarProduto(this.produto).then(response => {
 				if(response.data.msg) {
@@ -74,9 +81,6 @@ export default {
 				}
 			}).catch(err => {
 				let msg = 'Erro ao cadastrar o produto'
-				if(!this.produto.nome || !this.produto.valor || !this.produto.descricao || !this.produto.quantidade) {
-					msg = "Todos os campos são obrigatorio"
-				}
 				swal({
 					title: msg,
 					icon: 'error'
